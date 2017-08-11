@@ -60,11 +60,11 @@ class Meetup {
               }
             ]
           };
-          this.hubot.send({room: NOTIFICATION_CHANNEL}, message);
+          this.hubot.send({room: `#${NOTIFICATION_CHANNEL}`}, message);
         });
       this.redis.set(LAST_ANNOUNCED_KEY, events[events.length - 1].time, (err, ok) => {
         if (err) this.hubor.error(err);
-        this.lastAnnounced = events[events.length - 1];
+        this.lastAnnounced = events[events.length - 1].time;
       });
     });
   }
