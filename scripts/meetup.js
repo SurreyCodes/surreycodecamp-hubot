@@ -21,7 +21,7 @@ class Meetup {
       let opts = { password: parts.password || null, db: parts.database || null };
 
       try {
-        this.redis = Redis.createClient(parts.port, parts.hotname, opts);
+        this.redis = Redis.createClient(parts.port, parts.hostname, opts);
       } catch(err) {
         this.hubot.logger.error(err);
         this.redis = null;
