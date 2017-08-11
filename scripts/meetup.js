@@ -7,7 +7,8 @@ const moment = require('moment-timezone');
 
 const LAST_ANNOUNCED_KEY = 'events:last-announced';
 const NOTIFICATION_CHANNEL = process.env.HUBOT_MEETUP_NOTIFICATION_CHANNEL || null;
-const MEETUP_CHECK_INTERVAL = 10 * 60 * 1000;
+const MEETUP_CHECK_INTERVAL = parseInt(process.env.HUBOT_MEETUP_CHECK_INTERVAL || '10') * 60 * 1000;
+const MEETUP_GROUP_NAME = process.env.HUBOT_MEETUP_GROUP_NAME || 'Surrey-Code-Camp';
 
 
 class Meetup {
@@ -37,8 +38,11 @@ class Meetup {
   }
 
   _checkForAndAnnounceNewMeetups() {
-    request('https://api.meetup.com/Surrey-Code-Camp/events', (err, resp, events) => {
+    request(`https://api.meetup.com/${MEETUP_GROUP_NAME}/events`, (err, resp, events) => {
       events = JSON.parse(events);
+      if (events.length === 0) return;
+
+      this.hubot.logger.info(`Notifying #${NOTIFICATION_CHANNEL} of ${events.length} new events`);
       events
         .filter(ev => { return ev.time > this.lastAnnounced; })
         .sort((a, b) => { return a.time > b.time })
@@ -56,7 +60,7 @@ class Meetup {
               }
             ]
           };
-          this.hubot.send({room: NOTIFICATION_CHANNEL}, events);
+          this.hubot.send({room: NOTIFICATION_CHANNEL}, message);
         });
       this.redis.set(LAST_ANNOUNCED_KEY, events[events.length - 1].time, (err, ok) => {
         if (err) this.hubor.error(err);
