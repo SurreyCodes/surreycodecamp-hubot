@@ -53,7 +53,7 @@ class Meetup {
               {
                 fields: [
                   {title: 'Where', value: `${ev.venue.name}\n${ev.venue.address_1}, ${ev.venue.city}`, short: true},
-                  {title: 'When', value: moment(new Date(ev.time).toISOString()).tz('America/Vancouver').format('h:ma')}
+                  {title: 'When', value: moment(new Date(ev.time).toISOString()).tz('America/Vancouver').format('h:ma'), short: true}
                 ],
                 "thumb_url": "https://secure.meetupstatic.com/s/img/422066906568/logo/swarm/m_swarm_128x128.png",
                 "footer": ev.link
