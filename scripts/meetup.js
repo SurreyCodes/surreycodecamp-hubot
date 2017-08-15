@@ -109,7 +109,7 @@ class Meetup {
               {title: 'Where', value: `${ev.venue.name}\n${ev.venue.address_1}, ${ev.venue.city}`, short: true},
               {
                 title: 'When',
-                value: moment(new Date(ev.time).toISOString()).tz('America/Vancouver').format('h:ma'),
+                value: moment(new Date(ev.time).toISOString()).tz('America/Vancouver').format('MMM DD, YYYY h:ma'),
                 short: true
               }
             ],
