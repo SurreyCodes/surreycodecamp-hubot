@@ -1,4 +1,4 @@
 module.exports = (robot) ->
 
-  robot.hear /wifi/i, (res) ->
-    res.reply "betacollective20!4"
+  robot.hear /(^ponch|\sponch)\s*wifi/i, (msg) ->
+    msg.reply "betacollective20!4"
