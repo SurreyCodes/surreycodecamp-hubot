@@ -21,7 +21,7 @@
     "hubot-slack": "^4.7.1",
     "hubot-thesimpsons": "^1.1.5",
     "moment": "^2.24.0",
-    "moment-timezone": "^0.5.27",
+    "moment-timezone": "^0.5.35",
     "redis": "^2.8.0",
     "redis-url": "^1.2.1",
     "request": "^2.88.0"
